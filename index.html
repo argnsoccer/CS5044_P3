@@ -1,0 +1,37 @@
+<html>
+
+	<head>
+
+		<!-- we want to use D3, so this is where the D3 library version 5 gets called-->
+		<script src="https://d3js.org/d3.v5.js"></script>
+
+		<!--title of the webpage-->
+		<title> CS5044 Practical 3 </title>
+
+	</head>
+
+	<body>
+
+		<h1>Did Weather Affect Aerial Missions in WW2?</h1>
+		<script>
+
+			var dataOps = "data/operations.csv";
+			var dataWeather = "data/ww-ii-data.csv";
+
+			var promises = [d3.csv(dataOps), d3.csv(dataWeather)];
+
+			Promise.all(promises).then(ready);
+
+			function ready(data)
+			{
+				console.log(data)
+				var svgDoc = d3.select("body").append("svg")
+			}
+
+
+		</script>
+
+
+	</body>
+
+</html>
