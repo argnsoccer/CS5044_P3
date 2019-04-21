@@ -26,18 +26,45 @@
         			date: new Date(+yr, +mo-1,+day),
         			Station: d.STA,
         			Precipitation: d.PRCP,
-	        		Peak_Wind_Speed: d.SPD,
-        			Max_Temp: d.MAX,
-        			Min_Temp: d.MIN,
-        			Mean_Temp: d.MEA
+	        		peakWindSpeed: d.SPD,
+        			maxTemp: d.MAX,
+        			minTemp: d.MIN,
+        			meanTemp: d.MEA
 	        }
       }
 
+			var opsConverter = function(d)
+      {
+        	var timeData = d['Mission Date'];
+					var datum = timeData.split("/");
+
+	        return{
+        			date: new Date(+datum[2], +datum[0]-1,+datum[1]),
+							theaterOfOperations: d['Theater of Operations'],
+							country: d.Country,
+							airForce: d['Air Force'],
+							aircraftSeries: d['Aircraft Series'],
+							missionType: d['Mission Type'],
+							targetCountry: d['Target Country'],
+							targetCity: d['Target City'],
+							targetType: d['Target Type'],
+							targetIndustry: d['Target Industry'],
+							targetPrio: d['Target Priority'],
+							altitude: d['Altitude (Hundreds of Feet)'],
+							airboneAircraft: d['Airborne Aircraft'],
+							attackingAircraft: d['Attacking Aircraft'],
+							bombingAircraft: d['Bombing Aircraft'],
+							highExplosiveWeight: d['High Explosives Weight (Pounds)'],
+							totalWeight: d['Total Weight']
+
+	        }
+      }
 
 			var dataOps = "data/operations.csv";
 			var dataWeather = "data/ww2-weather.csv";
+			var stationList = "data/station-list.csv";
 
-			var promises = [d3.csv(dataOps), d3.csv(dataWeather, weatherConverter)];
+			var promises = [d3.csv(dataOps, opsConverter), d3.csv(dataWeather, weatherConverter), d3.csv(stationList)];
 
 			Promise.all(promises).then(ready);
 
