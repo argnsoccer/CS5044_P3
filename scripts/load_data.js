@@ -44,7 +44,7 @@ var opsConverter = function(d) {
 
 var dataOps = "data/operations.csv";
 var dataWeather = "data/ww2-weather.csv";
-var stationList = "data/station-list.csv";
+var stationList = "data/Weather Station Locations.csv";
 
 var promises = [d3.csv(dataOps, opsConverter), d3.csv(dataWeather, weatherConverter), d3.csv(stationList)];
 
@@ -54,8 +54,8 @@ function ready(data) {
 	//looking up and adding longitude and latitude of Weather station to weather data
 	data[1].forEach(function(weatherD) {
 	var result = data[2].filter(function(stationD) {return stationD.WBAN === weatherD.Station;});
-	weatherD.latitude = (result[0] !== undefined) ? result[0].LAT : null;
-		weatherD.longitude = (result[0] !== undefined) ? result[0].LON : null;
+	weatherD.latitude = (result[0] !== undefined) ? result[0].Latitude : null;
+	weatherD.longitude = (result[0] !== undefined) ? result[0].Longitude : null;
 	});
 	console.log(data)
 	var svgDoc = d3.select("body").append("svg").attr("width", 700).attr("height", 350);
