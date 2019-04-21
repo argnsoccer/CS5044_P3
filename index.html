@@ -14,46 +14,45 @@
 
 		<h1>Did Weather Affect Aerial Missions in WW2?</h1>
 		<script>
-				
-			
-			var weatherConverter = function(d)
-        		{
-        			var yr = d.YR;
-        			var mo = d.MO;
-                		var day = d.DA;
-                                                                
-	        		return
-        			{
-        				date: new Date(+yr, +mo-1,+day),
-        				Station: d.STA,
-        				Precipitation: d.PRCP,
-	        			Peak_Wind_Speed: d.SPD,
-        				Max_Temp: d.MAX,
-        				Min_Temp: d.MIN,
-        				Mean_Temp: d.MEA
-	        		}
-        		}  						
 
-			
+
+			var weatherConverter = function(d)
+      {
+        	var yr = d.YR;
+        	var mo = d.MO;
+          var day = d.DA;
+
+	        return{
+        			date: new Date(+yr, +mo-1,+day),
+        			Station: d.STA,
+        			Precipitation: d.PRCP,
+	        		Peak_Wind_Speed: d.SPD,
+        			Max_Temp: d.MAX,
+        			Min_Temp: d.MIN,
+        			Mean_Temp: d.MEA
+	        }
+      }
+
+
 			var dataOps = "data/operations.csv";
-			var dataWeather = "data/ww-ii-data.csv";
-				
+			var dataWeather = "data/ww2-weather.csv";
+
 			var promises = [d3.csv(dataOps), d3.csv(dataWeather, weatherConverter)];
 
 			Promise.all(promises).then(ready);
-				
+
 			function ready(data)
 			{
 				console.log(data);
-				var svgDoc = d3.select("body").append("svg").attr("width", 700).attr("height", 350);	
-			
-                
+				var svgDoc = d3.select("body").append("svg").attr("width", 700).attr("height", 350);
+
+
 
 			}
 
 
 		</script>
-		
+
 	</body>
 
 </html>
