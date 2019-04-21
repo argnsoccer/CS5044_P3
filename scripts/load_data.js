@@ -38,7 +38,11 @@ var opsConverter = function(d) {
 		attackingAircraft: d['Attacking Aircraft'],
 		bombingAircraft: d['Bombing Aircraft'],
 		highExplosiveWeight: d['High Explosives Weight (Pounds)'],
-		totalWeight: d['Total Weight']
+		totalWeight: d['Total Weight'],
+		targetLat: d['Target Latitude'],
+		targetLon: d['Target Longitude'],
+		takeoffLat: d['Takeoff Latitude'],
+		takeoffLon: d['Takeoff Longitude']
 	}
 }
 
@@ -59,5 +63,5 @@ function ready(data) {
 	});
 	console.log(data)
 	var svgDoc = d3.select("body").append("svg").attr("width", 700).attr("height", 350);
-	addToMap(data)
+	var map = new Map(data, new Date(1942, 7, 1));
 }
