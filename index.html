@@ -15,7 +15,7 @@
 		<h1>Did Weather Affect Aerial Missions in WW2?</h1>
 		<script>
 
-
+			//setting up what data we want to grab from each dataset
 			var weatherConverter = function(d)
       {
         	var yr = d.YR;
@@ -29,7 +29,9 @@
 	        		peakWindSpeed: d.SPD,
         			maxTemp: d.MAX,
         			minTemp: d.MIN,
-        			meanTemp: d.MEA
+        			meanTemp: d.MEA,
+							latitude: d.LAT,
+							longitude: d.LON
 	        }
       }
 
@@ -70,7 +72,16 @@
 
 			function ready(data)
 			{
-				console.log(data);
+				//looking up and adding longitude and latitude of Weather station to weather data
+				data[1].forEach(function(weatherD) {
+			    var result = data[2].filter(function(stationD) {
+			        return stationD.WBAN === weatherD.Station;
+			    });
+			    weatherD.latitude = (result[0] !== undefined) ? result[0].LAT : null;
+					weatherD.longitude = (result[0] !== undefined) ? result[0].LON : null;
+				});
+
+				console.log(data)
 				var svgDoc = d3.select("body").append("svg").attr("width", 700).attr("height", 350);
 
 
