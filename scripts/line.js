@@ -101,7 +101,7 @@ class LineChart
 
         //console.log(missionCounts);
 
-        svg.append("path").data(missionCounts).attr("class", "line").attr("d", line);
+        svg.append("path").datum(lineData).attr("class", "line").attr("d", line);
         // d3.select("svg").
         //     append("path")
         //         .datum(missionCounts)
