@@ -53,7 +53,7 @@ class LineChart
             return 100 + xScale(new Date(d.key));
         })
         .y(function(d,i){
-            return yScale(parseInt(i));
+            return yScale(parseInt(d.values));
         });
 
         var xaxis = d3.axisBottom(xScale);
@@ -71,6 +71,9 @@ class LineChart
             .style("fill", "black")
             .attr("transform", "rotate(-90,0,90) translate(-100,0)");
 
+        svg.append("text")
+            .text("Missions Over Time")
+            .style("fill", "black");
 
         svg.append("g")
             .attr("class", "x axis")
