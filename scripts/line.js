@@ -53,13 +53,13 @@ class LineChart
         var yaxis = d3.axisLeft(yScale);
 
         
-        d3.select("xaxis")
+        d3.select("x.axis")
             .append("text")
             .text("Date")
             .style("fill", "black")
             .attr("x", 1400/2);
 
-        d3.select("yaxis")
+        d3.select("y.axis")
             .append("text")
             .text("Missions Carried Out")
             .style("fill", "black")
@@ -93,9 +93,9 @@ class LineChart
         //         .attr("transform", "translate(100,500)")
         //         .call(yaxis);
 
-        console.log(missionCounts.values);
+        console.log(missionCounts);
 
-        svg.append("path").datum(missionCounts).attr("class", "line").attr("d", line);
+        svg.append("path").data(missionCounts).attr("class", "line").attr("d", line);
         // d3.select("svg").
         //     append("path")
         //         .datum(missionCounts)
