@@ -6,8 +6,6 @@ class LineChart
     {
         this.data = data;
         this.processGraph();
-        this.width = document.body.clientWidth;
-        this.height = document.body.clientHeight;
         this.margin = 100;
     }
 
@@ -15,7 +13,7 @@ class LineChart
     {
         var width = document.body.clientWidth;
         console.log(width);
-        var height = this.height;
+        var height = document.body.clientHeight;
         var margin = this.margin;
         var data = this.data;
         var opsData = data[0];
