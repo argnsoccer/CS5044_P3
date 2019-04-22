@@ -53,27 +53,17 @@ class LineChart
         var yaxis = d3.axisLeft(yScale);
 
         
-        xaxis.append("text")
+        d3.select("xaxis")
+            .append("text")
             .text("Date")
             .style("fill", "black")
             .attr("x", 1400/2);
 
-        // d3.select("xaxis")
-        //     .append("text")
-        //     .text("Date")
-        //     .style("fill", "black")
-        //     .attr("x", 1400/2);
-
-        yaxis.append("text")
+        d3.select("yaxis")
+            .append("text")
             .text("Missions Carried Out")
             .style("fill", "black")
             .attr("transform", "rotate(-90,0," + 90 + ") translate(" + -100 + ",0)");
-
-        // d3.select("yaxis")
-        //     .append("text")
-        //     .text("Missions Carried Out")
-        //     .style("fill", "black")
-        //     .attr("transform", "rotate(-90,0," + 90 + ") translate(" + -100 + ",0)");
 
         svg.append("g")
             .attr("class", "x axis")
