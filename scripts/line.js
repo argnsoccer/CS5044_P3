@@ -17,9 +17,6 @@ class LineChart
         .key(function(d){
             return d.date;
         })
-        .rollup(function(leaves){
-            return d3.sum(leaves)
-        })
         .key(function(d){
             return d.id
         })
@@ -35,11 +32,15 @@ class LineChart
         var xScale = d3.scaleTime().domain(timeExtent).range([0,1400]);
 
         var missionCounts = new Array();
+        var lineData = new Object();
         for(var i = 0; i < dataLength; i++)
         {
             var length = d3.values(missionWeatherData[i])[1].length;
             missionCounts.push(length);
+            lineData[d3.values(missionWeatherData[i])[0]] = length;
         }
+
+        console.log(lineData);
         
         var sumExtent = d3.extent(missionCounts, function(d){
             return parseInt(d);
