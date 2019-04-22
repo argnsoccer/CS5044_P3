@@ -26,7 +26,7 @@ class LineChart
         });
         var dataLength = d3.values(missionWeatherData).length;
 
-        var xScale = d3.scaleTime().domain(timeExtent).range([0,width]);
+        var xScale = d3.scaleTime().domain(timeExtent).range([0,1503]);
         var missionCounts = new Array();
         for(i = 0; i < dataLength; i++)
         {
