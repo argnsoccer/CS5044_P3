@@ -1,5 +1,5 @@
 //Load a map, open street view style.
-var map = L.map('map').setView([0, 0], 2); 
+var map = L.map('map').setView([0, 0], 2);
 
 
 //here we include a tile layer that specifies the visual look of our map
@@ -14,7 +14,7 @@ class Map {
         this.date = date;
         this.data = data;
         this.refreshAdverseWeather();
-        this.refreshTemperature();	
+        this.refreshTemperature();
         this.refreshMissions();
         //this.refreshPrecipitation();
         //this.refreshWindSpeed();
@@ -24,7 +24,7 @@ class Map {
         var data = this.data;
         var missionData = data[0];
         missionData = missionData.filter(getFilter(this));
-        console.log("Number of missions today: " + missionData.length);
+        //console.log("Number of missions today: " + missionData.length);
         missionData.forEach(function(d) {
             var arrow = L.polyline([[d.takeoffLat, d.takeoffLon], [d.targetLat, d.targetLon]]).addTo(map);
             //From:
@@ -37,7 +37,7 @@ class Map {
                         symbol: L.Symbol.arrowHead({pixelSize: 15, polygon: false, pathOptions: {stroke: true}})
                     }
                 ]
-            }).addTo(map);  
+            }).addTo(map);
         })
     }
 
@@ -53,7 +53,7 @@ class Map {
             }
         })
 
-        console.log("Incidents of adverse weather: " + refreshData.length);
+        //console.log("Incidents of adverse weather: " + refreshData.length);
 
         refreshData.forEach(function(d) {
             var marker = L.marker([d[0], d[1]]).addTo(map)
@@ -71,9 +71,9 @@ class Map {
                 refreshData.push([d.Precipitation, d.latitude, d.longitude, d.Station]);
             }
         })
-        //Create the layer    
+        //Create the layer
         this.refreshLayer(refreshData, 10, " Precipitation: ", " inches", 'white', 'grey', 'navy');
-        console.log(refreshData)
+        //console.log(refreshData)
     }
 
     refreshTemperature() {
@@ -85,9 +85,9 @@ class Map {
             var temp = Math.round(((d.meanTemp-32)/1.8) * 100) / 100
             refreshData.push([temp, d.latitude, d.longitude, d.Station]);
         })
-        //Create the layer    
+        //Create the layer
         this.refreshLayer(refreshData, 5, " Temp: ", " c", 'blue', 'lime', 'red');
-        console.log(refreshData)
+        //console.log(refreshData)
     }
 
     refreshWindSpeed() {
@@ -98,9 +98,9 @@ class Map {
         weatherData.forEach(function(d) {
             refreshData.push([d.peakWindSpeed, d.latitude, d.longitude, d.Station]);
         })
-        //Create the layer    
+        //Create the layer
         this.refreshLayer(refreshData, 5, " Peak Wind Speed: ", " knots", 'white', 'lime', 'green');
-        console.log(refreshData)
+        //console.log(refreshData)
     }
 
     refreshLayer(dataVar, exp, labelFront, labelEnd, colourLeft, colourCenter, colourRight) {
@@ -132,16 +132,16 @@ class Map {
         var weatherStation = new WeatherStation();
 
         dataVar.forEach(function(d) {
-            var marker = L.marker([d[1], d[2]], 
+            var marker = L.marker([d[1], d[2]],
                 {icon: weatherStation}).addTo(map)
-                .bindPopup("Station: " + d[3] + labelFront 
+                .bindPopup("Station: " + d[3] + labelFront
                     + d[0] + labelEnd);
         })
 
         //Library we use for these neat interpolated maps
         //https://github.com/JoranBeaufort/Leaflet.idw
         var idx = L.idwLayer(arr, {opacity: 0.3, cellSize: 10, exp: exp,
-            max: max+diff, 
+            max: max+diff,
             gradient:{0: colourLeft, 0.5: colourCenter, 1: colourRight}}).addTo(map);
     }
 
@@ -153,7 +153,6 @@ class Map {
 function getFilter(map) {
     return function dateFilter(d) {
         var date = map.getDate();
-        return d.date.getTime() == date.getTime(); 
+        return d.date.getTime() == date.getTime();
     }
 }
-

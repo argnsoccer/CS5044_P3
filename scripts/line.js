@@ -1,4 +1,4 @@
-var svg = d3.select("body").append("svg").attr("width", 1400).attr("height", 500);
+var svg = d3.select("body").append("svg").attr("width", document.body.clientWidth).attr("height", 500);
 
 class LineChart
 {
@@ -6,8 +6,6 @@ class LineChart
     {
         this.data = data;
         this.processGraph();
-        this.width = document.body.clientWidth;
-        this.height = document.body.clientHeight;
         this.margin = 100;
     }
 
@@ -15,7 +13,7 @@ class LineChart
     {
         var width = document.body.clientWidth;
         console.log(width);
-        var height = this.height;
+        var height = document.body.clientHeight;
         var margin = this.margin;
         var data = this.data;
         var opsData = data[0];
@@ -30,14 +28,14 @@ class LineChart
         })
         .entries(opsData);
 
-        
+
         //turn the keys back into Date objects
         missionWeatherData.forEach(element => {
             element.key = new Date(+element.key);
         });
 
 
-        console.log(missionWeatherData);
+        // console.log(missionWeatherData);
 
         //created extents and scales for axes
         var timeExtent = d3.extent(opsData, function(d){
@@ -57,8 +55,8 @@ class LineChart
             lineData.push({date: d3.values(missionWeatherData[i])[0], count: length});
         }
 
-        console.log(lineData);
-        
+        // console.log(lineData);
+
         var sumExtent = d3.extent(missionCounts, function(d){
             return parseInt(d);
         });
@@ -98,7 +96,7 @@ class LineChart
 
         svg.append("text")
             .attr("transform", "rotate(-90,0,90) translate(-200,120)")
-            .text("Missions Over Time")
+            .text("Amount of Aerial Missions")
             .style("fill", "black");
 
         svg.append("g")
@@ -128,6 +126,6 @@ class LineChart
         // console.log(missionWeatherData);
     }
 
-    
+
 
 }
