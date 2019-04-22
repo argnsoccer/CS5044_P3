@@ -15,15 +15,18 @@ class LineChart
         var data = this.data;
         var opsData = data[0];
         var weatherData = data[1];
+        //create nested data with date and missions
         var missionWeatherData = d3.nest()
         .key(function(d){
-            return +d.date;
+            return +d.date;//turn date into number to sort using sortKeys
         }).sortKeys((a, b) => a - b)
         .key(function(d){
             return d.id
         })
         .entries(opsData);
 
+        
+        //turn the keys back into Date objects
         missionWeatherData.forEach(element => {
             element.key = new Date(+element.key);
         });
@@ -31,7 +34,7 @@ class LineChart
 
         console.log(missionWeatherData);
 
-
+        //created extents and scales for axes
         var timeExtent = d3.extent(opsData, function(d){
             return d.date;
         });
@@ -41,6 +44,7 @@ class LineChart
 
         var missionCounts = new Array();
         var lineData = [];
+        //creating the counts array for yscale as well as a dictionary with the date and the counts
         for(var i = 0; i < dataLength; i++)
         {
             var length = d3.values(missionWeatherData[i])[1].length;
@@ -64,6 +68,7 @@ class LineChart
             return yScale(parseInt(d.count));
         });
 
+        //in case we wanted to make the line chart an area graph
         var area = d3.area()
         .x(function(d){
             return 100 + xScale(new Date(d.date));
@@ -78,6 +83,8 @@ class LineChart
         var xaxis = d3.axisBottom(xScale);
         var yaxis = d3.axisLeft(yScale);
 
+
+
         d3.select(".x.axis")
             .append("text")
             .text("Date")
@@ -91,6 +98,12 @@ class LineChart
             .attr("transform", "rotate(-90,0,90) translate(-100,0)");
 
         svg.append("text")
+            .text("Date")
+            .style("fill", "black")
+            .attr("x", 1400/2)
+            .attr("y", 500);
+        svg.append("text")
+            .attr("transform", "translate(100, 225)")
             .text("Missions Over Time")
             .style("fill", "black");
 
