@@ -39,8 +39,6 @@ class LineChart
             return parseInt(d);
         });
 
-        console.log(sumExtent);
-
         var yScale = d3.scaleLinear().domain(sumExtent).range([400,0]);
 
         var line = d3.line()
@@ -48,7 +46,7 @@ class LineChart
             return 100 + xScale(new Date(d.key));
         })
         .y(function(d){
-            return yScale(parseInt(d.values));
+            return yScale(parseInt(d-d.values));
         });
 
         var xaxis = d3.axisBottom(xScale);
