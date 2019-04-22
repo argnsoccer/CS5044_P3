@@ -25,7 +25,7 @@ class LineChart
         .entries(opsData);
 
         missionWeatherData.forEach(element => {
-            element.key = Date(element.key);
+            element.key = new Date(element.key);
         });
 
 
