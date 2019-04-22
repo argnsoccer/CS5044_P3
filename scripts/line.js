@@ -68,7 +68,7 @@ class LineChart
 
         svg.append("g")
             .attr("class", "x axis")
-            .attr("transform", "translate(100, 900)")
+            .attr("transform", "translate(100, 0)")
             .call(xaxis.tickFormat(d3.timeFormat("%Y-%m-%d")))
                 .selectAll("text")
                 .style("text-anchor", "end")
@@ -76,23 +76,23 @@ class LineChart
                 .attr("dy", ".15em")
                 .attr("transform", "rotate(-65)");
 
-        d3.select("svg")
-            .append("g")
-                .attr("class", "x axis")
-                .attr("transform", "translate(100, 450)")
-                .call(xaxis.tickFormat(d3.timeFormat("%Y-%m-%d")))
-                    .selectAll("text")
-                    .style("text-anchor", "end")
-                    .attr("dx", "-.8em")
-                    .attr("dy", ".15em")
-                    .attr("transform", "rotate(-65)");
+        // d3.select("svg")
+        //     .append("g")
+        //         .attr("class", "x axis")
+        //         .attr("transform", "translate(100, 450)")
+        //         .call(xaxis.tickFormat(d3.timeFormat("%Y-%m-%d")))
+        //             .selectAll("text")
+        //             .style("text-anchor", "end")
+        //             .attr("dx", "-.8em")
+        //             .attr("dy", ".15em")
+        //             .attr("transform", "rotate(-65)");
 
         svg.append("g").attr("class", "y axis").attr("transform", "translate(100, 0)").call(yaxis);
-        d3.select("svg")
-            .append("g").
-                attr("class", "y axis")
-                .attr("transform", "translate(100,500)")
-                .call(yaxis);
+        // d3.select("svg")
+        //     .append("g").
+        //         attr("class", "y axis")
+        //         .attr("transform", "translate(100,500)")
+        //         .call(yaxis);
 
 
         svg.append("path").datum(missionCounts).attr("class", "line").attr("d", line);
