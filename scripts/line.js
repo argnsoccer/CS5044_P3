@@ -101,9 +101,10 @@ class LineChart
             .text("Date")
             .style("fill", "black")
             .attr("x", 1400/2)
-            .attr("y", 500);
+            .attr("y", 480);
+
         svg.append("text")
-            .attr("transform", "translate(100, 225)")
+            .attr("transform", "rotate(-90,0,90) translate(-100,0)")
             .text("Missions Over Time")
             .style("fill", "black");
 
