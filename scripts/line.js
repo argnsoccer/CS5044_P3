@@ -39,7 +39,7 @@ class LineChart
             return parseInt(d);
         });
 
-        var yScale = d3.scaleLinear().domain(sumExtent).range([450,0]);
+        var yScale = d3.scaleLinear().domain(sumExtent).range([400,0]);
 
         var line = d3.line()
         .x(function(d){
@@ -68,7 +68,7 @@ class LineChart
 
         svg.append("g")
             .attr("class", "x axis")
-            .attr("transform", "translate(100, 450)")
+            .attr("transform", "translate(100, 400)")
             .call(xaxis.tickFormat(d3.timeFormat("%Y-%m-%d")))
                 .selectAll("text")
                 .style("text-anchor", "end")
