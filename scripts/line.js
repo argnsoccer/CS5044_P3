@@ -17,7 +17,7 @@ class LineChart
         var weatherData = data[1];
         var missionWeatherData = d3.nest()
         .key(function(d){
-            return +d.date;
+            return d => +d.date;
         }).sortKeys((a, b) => a - b)
         .key(function(d){
             return d.id
