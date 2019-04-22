@@ -13,7 +13,7 @@ class LineChart
 
     processGraph()
     {
-        var width = this.width;
+        var width = document.body.clientWidth;
         console.log(width);
         var height = this.height;
         var margin = this.margin;
