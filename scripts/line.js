@@ -1,4 +1,18 @@
 var svg = d3.select("body").append("svg").attr("width", 1400).attr("height", 500);
+var xaxis = d3.axisBottom(xScale);
+var yaxis = d3.axisLeft(yScale);
+
+d3.select(".x.axis")
+    .append("text")
+    .text("Date")
+    .style("fill", "black")
+    .attr("x", 1400/2);
+
+d3.select(".y.axis")
+    .append("text")
+    .text("Missions Carried Out")
+    .style("fill", "black")
+    .attr("transform", "rotate(-90,0,90) translate(-100,0)");
 class LineChart
 {
     constructor(data)
@@ -19,7 +33,12 @@ class LineChart
         .key(function(d){
             return d.id
         })
+        .rollup(function(leaves){
+            return d3.sum(leaves)
+        })
         .entries(opsData);
+
+        console.log(missionWeatherData);
 
         var timeExtent = d3.extent(opsData, function(d){
             return d.date;
@@ -49,21 +68,7 @@ class LineChart
             return yScale(parseInt(d));
         });
 
-        var xaxis = d3.axisBottom(xScale);
-        var yaxis = d3.axisLeft(yScale);
 
-        
-        d3.select("x.axis")
-            .append("text")
-            .text("Date")
-            .style("fill", "black")
-            .attr("x", 1400/2);
-
-        d3.select("y.axis")
-            .append("text")
-            .text("Missions Carried Out")
-            .style("fill", "black")
-            .attr("transform", "rotate(-90,0," + 90 + ") translate(" + -100 + ",0)");
 
         svg.append("g")
             .attr("class", "x axis")
@@ -93,7 +98,7 @@ class LineChart
         //         .attr("transform", "translate(100,500)")
         //         .call(yaxis);
 
-        console.log(missionCounts);
+        //console.log(missionCounts);
 
         svg.append("path").data(missionCounts).attr("class", "line").attr("d", line);
         // d3.select("svg").
