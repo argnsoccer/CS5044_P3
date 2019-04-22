@@ -15,10 +15,10 @@ class LineChart
         var weatherData = data[1];
         var missionWeatherData = d3.nest()
         .key(function(d){
-            return d[0].date;
+            return d[1].adverseWeather;
         })
         .key(function(d){
-            return d[1].adverseWeather;
+            return d[0].date
         })
         .entries(data);
         console.log(missionWeatherData);
