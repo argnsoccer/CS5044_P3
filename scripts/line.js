@@ -21,9 +21,22 @@ class LineChart
             return d.id
         })
         .entries(opsData);
-        var length = d3.values(missionWeatherData[0])[1].length;
-        console.log(missionWeatherData[0])
-        console.log(length);
+        var timeExtent = d3.extent(opsData, function(d){
+            return d.date;
+        });
+        var dataLength = d3.values(missionWeatherData).length;
+
+        var xScale = d3.scaleTime().domain(timeExtent).range([0,width]);
+        var missionCounts = new Array();
+        for(i = 0; i < dataLength; i++)
+        {
+            var length = d3.values(missionWeatherData[i])[1].length;
+            missionCounts.push(length);
+        }
+        
+        console.log(missionCounts);
+
+        console.log(dataLength);
         console.log(missionWeatherData);
     }
 
