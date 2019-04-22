@@ -10,6 +10,7 @@ class LineChart
 
     processGraph()
     {
+        var data = this.data;
         var opsData = data[0];
         var weatherData = data[1];
         var missionWeatherData = d3.nest()
