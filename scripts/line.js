@@ -21,7 +21,7 @@ class LineChart
         var missionWeatherData = d3.nest()
         .key(function(d){
             return d.date;
-        }).sort(sortByDateAscending)
+        })
         .key(function(d){
             return d.id
         })
@@ -41,6 +41,7 @@ class LineChart
         var lineData = [];
         for(var i = 0; i < dataLength; i++)
         {
+            missionWeatherData[i] = missionWeatherData[i].sort(sortByDateAscending)
             var length = d3.values(missionWeatherData[i])[1].length;
             missionCounts.push(length);
             lineData.push({date: d3.values(missionWeatherData[i])[0], count: length});
