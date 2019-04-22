@@ -23,6 +23,7 @@ var opsConverter = function(d) {
 	var datum = timeData.split("/");
 
 	return {
+		missionId: d['Mission ID'],
 		date: new Date(+datum[2], +datum[0]-1,+datum[1]),
 		id: d['Mission ID'],
 		theaterOfOperations: d['Theater of Operations'],
@@ -63,8 +64,10 @@ function ready(data) {
 		weatherD.latitude = (result[0] !== undefined) ? result[0].Latitude : null;
 		weatherD.longitude = (result[0] !== undefined) ? result[0].Longitude : null;
 	});
-	console.log(data)
 	
 	var map = new Map(data, new Date(1945, 2, 16));
 	var lineChart = new LineChart(data); 
+	var svgDoc = d3.select("body").append("svg").attr("width", 700).attr("height", 350);
+	var map = new Map(data, new Date(1945, 2, 16));
+	var dashboard = new Dashboard(data, '1');
 }
