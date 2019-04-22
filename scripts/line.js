@@ -27,7 +27,7 @@ class LineChart
         })
         .entries(opsData)
 
-        missionWeatherData = missionWeatherData.sort(sortByDateAscending)
+        missionWeatherData[0] = missionWeatherData.sort(sortByDateAscending)
         console.log(missionWeatherData);
 
         var timeExtent = d3.extent(opsData, function(d){
@@ -41,7 +41,6 @@ class LineChart
         var lineData = [];
         for(var i = 0; i < dataLength; i++)
         {
-            missionWeatherData[i] = missionWeatherData.sort(sortByDateAscending)
             var length = d3.values(missionWeatherData[i])[1].length;
             missionCounts.push(length);
             lineData.push({date: d3.values(missionWeatherData[i])[0], count: length});
