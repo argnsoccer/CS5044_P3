@@ -85,18 +85,6 @@ class LineChart
 
 
 
-        d3.select(".x.axis")
-            .append("text")
-            .text("Date")
-            .style("fill", "black")
-            .attr("x", 1400/2);
-
-        d3.select(".y.axis")
-            .append("text")
-            .text("Missions Carried Out")
-            .style("fill", "black")
-            .attr("transform", "rotate(-90,0,90) translate(-100,0)");
-
         svg.append("text")
             .text("Date")
             .style("fill", "black")
@@ -104,7 +92,7 @@ class LineChart
             .attr("y", 480);
 
         svg.append("text")
-            .attr("transform", "rotate(-90,0,90) translate(0,225)")
+            .attr("transform", "rotate(-90,0,90) translate(-100,400)")
             .text("Missions Over Time")
             .style("fill", "black");
 
