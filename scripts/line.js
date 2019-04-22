@@ -79,7 +79,7 @@ class LineChart
         d3.select("svg")
             .append("g")
                 .attr("class", "x axis")
-                .attr("transform", "translate(0, " + 500 + ")")
+                .attr("transform", "translate(100, 0)")
                 .call(xaxis.tickFormat(d3.timeFormat("%Y-%m-%d")))
                     .selectAll("text")
                     .style("text-anchor", "end")
