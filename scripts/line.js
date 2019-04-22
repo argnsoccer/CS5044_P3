@@ -21,8 +21,8 @@ class LineChart
             return d.id
         })
         .entries(opsData)
-        .sort(function(d){
-            return d3.ascending(d.values);
+        .sort(function(a,b){
+            return d3.ascending(a.values, b.values);
         });
 
         console.log(missionWeatherData);
