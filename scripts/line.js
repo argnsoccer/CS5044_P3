@@ -46,7 +46,7 @@ class LineChart
             return 100 + xScale(new Date(d.key));
         })
         .y(function(d){
-            return yScale(parseInt(d-d.values));
+            return yScale(parseInt(d) - parseInt(d.values));
         });
 
         var xaxis = d3.axisBottom(xScale);
