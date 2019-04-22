@@ -1,4 +1,4 @@
-
+var svg = d3.select("body").append("svg").attr("width", 1400).attr("height", 500);
 class LineChart
 {
     constructor(data)
@@ -50,7 +50,7 @@ class LineChart
         var xaxis = d3.axisBottom(xScale);
         var yaxis = d3.axisLeft(yScale);
 
-        var svg = d3.select("body").append("svg").attr("width", 1400).attr("height", 500).attr("margin");
+        
 
         d3.select(".x.axis")
             .append("text")
