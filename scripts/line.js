@@ -123,8 +123,7 @@ class LineChart
             .datum(lineData)
             .attr("class", "area")
             .attr("d", area)
-            .style("stroke", "red")
-            .style("fill", "none");
+            .style("stroke", "red");
         // d3.select("svg").
         //     append("path")
         //         .datum(missionCounts)
