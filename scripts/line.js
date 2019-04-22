@@ -24,11 +24,9 @@ class LineChart
         })
         .entries(opsData);
 
-        var missionData = d3.nest()
-        .key(function(d){
-            return Date(d.key);
-        })
-        .entries(missionWeatherData);
+        missionWeatherData.forEach(element => {
+            element.key = Date(element.key);
+        });
 
         console.log(missionData);
 
