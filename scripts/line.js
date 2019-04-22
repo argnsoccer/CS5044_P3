@@ -6,14 +6,13 @@ class LineChart
     {
         this.data = data;
         this.processGraph();
-        this.width = screen.width;
-        this.height = screen.height;
+        this.width = $(window).width();
+        this.height = $(window).height();
         this.margin = 100;
     }
 
     processGraph()
     {
-
         var width = this.width;
         console.log(width);
         var height = this.height;
