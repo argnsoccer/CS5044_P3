@@ -20,12 +20,14 @@ class LineChart
             return d.id
         })
         .entries(opsData);
+
         var timeExtent = d3.extent(opsData, function(d){
             return d.date;
         });
         var dataLength = d3.values(missionWeatherData).length;
 
         var xScale = d3.scaleTime().domain(timeExtent).range([0,1400]);
+
         var missionCounts = new Array();
         for(var i = 0; i < dataLength; i++)
         {
@@ -89,7 +91,7 @@ class LineChart
         d3.select("svg")
             .append("g").
                 attr("class", "y axis")
-                .attr("transform", "translate(" + 600 + ", 0)")
+                .attr("transform", "translate(" + 100 + ", " + 550 + ")")
                 .call(yaxis);
 
 
