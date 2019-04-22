@@ -17,15 +17,11 @@ class LineChart
         .key(function(d){
             return d.date;
         })
-        .rollup(function(leaves){
-            return d3.sum(leaves, function(d){
-                return parseInt(d.VALUE);
-            })
-        })
         .key(function(d){
             return d.id
         })
         .entries(opsData);
+        var length = missionWeatherData[0].length;
         console.log(missionWeatherData);
     }
 
