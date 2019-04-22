@@ -56,6 +56,17 @@ class LineChart
             return yScale(parseInt(d.count));
         });
 
+        var area = d3.area()
+        .x(function(d){
+            return 100 + xScale(new Date(d.date));
+        })
+        .y1(function(d){
+            return yScale(parseInt(d.count));
+        })
+        .y0(function(d){
+            return yScale.range()[0];
+        });
+
         var xaxis = d3.axisBottom(xScale);
         var yaxis = d3.axisLeft(yScale);
 
@@ -107,8 +118,8 @@ class LineChart
 
         svg.append("path")
             .datum(lineData)
-            .attr("class", "line")
-            .attr("d", line)
+            .attr("class", "area")
+            .attr("d", area)
             .style("stroke", "red")
             .style("fill", "none");
         // d3.select("svg").
