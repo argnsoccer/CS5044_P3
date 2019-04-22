@@ -49,11 +49,11 @@ class LineChart
         var yScale = d3.scaleLinear().domain(sumExtent).range([400,0]);
 
         var line = d3.line()
-        .x(function(d){
+        .x(function(d,i){
             return 100 + xScale(new Date(d.key));
         })
-        .y(function(d){
-            return yScale(parseInt(d.values));
+        .y(function(d,i){
+            return yScale(parseInt(i));
         });
 
         var xaxis = d3.axisBottom(xScale);
@@ -71,19 +71,16 @@ class LineChart
             .style("fill", "black")
             .attr("transform", "rotate(-90,0,90) translate(-100,0)");
 
+
         svg.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(100, 400)")
-            .append("text")
-                .text("Date")
-                .style("fill", "black")
-                .attr("x", 1400/2)
             .call(xaxis.tickFormat(d3.timeFormat("%Y-%m-%d")))
                 .selectAll("text")
                 .style("text-anchor", "end")
                 .attr("dx", "-.8em")
                 .attr("dy", ".15em")
-                .attr("transform", "rotate(-65)");
+                .attr("transform", "rotate(-65)")
 
         // d3.select("svg")
         //     .append("g")
@@ -105,7 +102,7 @@ class LineChart
 
         //console.log(missionCounts);
 
-        svg.append("path").datum(lineData).attr("class", "line").attr("d", line);
+        svg.append("path").attr("class", "line").attr("d", line(lineData));
         // d3.select("svg").
         //     append("path")
         //         .datum(missionCounts)
