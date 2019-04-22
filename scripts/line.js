@@ -106,6 +106,7 @@ class LineChart
         //console.log(missionCounts);
 
         svg.append("path")
+            .datum(lineData)
             .attr("class", "line")
             .attr("d", line(lineData))
             .style("stroke", "red");
