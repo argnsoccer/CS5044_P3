@@ -1,6 +1,6 @@
 
 
-class lineChart
+class LineChart
 {
     constructor(data)
     {
