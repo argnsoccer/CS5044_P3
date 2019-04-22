@@ -39,6 +39,8 @@ class LineChart
             return parseInt(d);
         });
 
+        console.log(sumExtent);
+
         var yScale = d3.scaleLinear().domain(sumExtent).range([400,0]);
 
         var line = d3.line()
