@@ -6,12 +6,17 @@ class LineChart
     {
         this.data = data;
         this.processGraph();
+        this.width = $(window).width;
+        this.height = $(window).height;
+        this.margin = 100;
     }
 
     processGraph()
     {
 
-
+        var width = this.width;
+        var height = this.height;
+        var margin = this.margin;
         var data = this.data;
         var opsData = data[0];
         var weatherData = data[1];
@@ -40,7 +45,7 @@ class LineChart
         });
         var dataLength = d3.values(missionWeatherData).length;
 
-        var xScale = d3.scaleTime().domain(timeExtent).range([0,1400]);
+        var xScale = d3.scaleTime().domain(timeExtent).range([0,width]);
 
         var missionCounts = new Array();
         var lineData = [];
@@ -71,7 +76,7 @@ class LineChart
         //in case we wanted to make the line chart an area graph
         var area = d3.area()
         .x(function(d){
-            return 100 + xScale(new Date(d.date));
+            return margin + xScale(new Date(d.date));
         })
         .y1(function(d){
             return yScale(parseInt(d.count));
@@ -88,7 +93,7 @@ class LineChart
         svg.append("text")
             .text("Date")
             .style("fill", "black")
-            .attr("x", 1400/2)
+            .attr("x", width/2)
             .attr("y", 480);
 
         svg.append("text")
@@ -106,25 +111,9 @@ class LineChart
                 .attr("dy", ".15em")
                 .attr("transform", "rotate(-65)")
 
-        // d3.select("svg")
-        //     .append("g")
-        //         .attr("class", "x axis")
-        //         .attr("transform", "translate(100, 450)")
-        //         .call(xaxis.tickFormat(d3.timeFormat("%Y-%m-%d")))
-        //             .selectAll("text")
-        //             .style("text-anchor", "end")
-        //             .attr("dx", "-.8em")
-        //             .attr("dy", ".15em")
-        //             .attr("transform", "rotate(-65)");
 
         svg.append("g").attr("class", "y axis").attr("transform", "translate(100, 0)").call(yaxis);
-        // d3.select("svg")
-        //     .append("g").
-        //         attr("class", "y axis")
-        //         .attr("transform", "translate(100,500)")
-        //         .call(yaxis);
 
-        //console.log(missionCounts);
 
         svg.append("path")
             .datum(lineData)
@@ -132,11 +121,6 @@ class LineChart
             .attr("d", line)
             .style("stroke", "red")
             .style("fill", "none");
-        // d3.select("svg").
-        //     append("path")
-        //         .datum(missionCounts)
-        //         .attr("class", "line")
-        //         .attr("d", line);
 
         // console.log(missionCounts);
 
