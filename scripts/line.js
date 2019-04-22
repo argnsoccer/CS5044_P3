@@ -48,7 +48,7 @@ class LineChart
 
         var yScale = d3.scaleLinear().domain(sumExtent).range([400,0]);
 
-        var line = d3.line()
+        var line = d3.svg.line()
         .x(function(d,i){
             return 100 + xScale(new Date(d.key));
         })
@@ -102,7 +102,10 @@ class LineChart
 
         //console.log(missionCounts);
 
-        svg.append("path").attr("class", "line").attr("d", line(lineData));
+        svg.append("path")
+            .attr("class", "line")
+            .attr("d", line(lineData))
+            .style("stroke", "red");
         // d3.select("svg").
         //     append("path")
         //         .datum(missionCounts)
