@@ -48,7 +48,7 @@ class LineChart
 
         var yScale = d3.scaleLinear().domain(sumExtent).range([400,0]);
 
-        var line = d3.svg.line()
+        var line = d3.line()
         .x(function(d,i){
             return 100 + xScale(new Date(d.key));
         })
