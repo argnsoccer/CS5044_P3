@@ -50,14 +50,14 @@ class LineChart
         var xaxis = d3.axisBottom(xScale);
         var yaxis = d3.axisLeft(yScale);
 
-        var svg = d3.select("body").append("svg").attr("width", 1400).attr("height", 400).attr("margin");
+        var svg = d3.select("body").append("svg").attr("width", 1400).attr("height", 500).attr("margin");
 
         d3.select(".x.axis").append("text").text("Date").style("fill", "black").attr("x", 1400/2);
         d3.select(".y.axis").append("text").text("Missions Carried Out").style("fill", "black").attr("transform", "rotate(-90,0," + 90 + ") translate(" + -100 + ",0)");
 
-        svg.append("g").attr("class", "x axis").attr("transform", "translate(0, " + 400 + ")").call(xaxis.tickFormat(d3.timeFormat("%Y-%m-%d"))).selectAll("text").style("text-anchor", "end").attr("dx", "-.8em").attr("dy", ".15em").attr("transform", "rotate(-65)");
+        svg.append("g").attr("class", "x axis").attr("transform", "translate(0, " + 500 + ")").call(xaxis.tickFormat(d3.timeFormat("%Y-%m-%d"))).selectAll("text").style("text-anchor", "end").attr("dx", "-.8em").attr("dy", ".15em").attr("transform", "rotate(-65)");
 
-        d3.select("svg").append("g").attr("class", "x axis").attr("transform", "translate(0, " + 400 + ")").call(xaxis.tickFormat(d3.timeFormat("%Y-%m-%d"))).selectAll("text").style("text-anchor", "end").attr("dx", "-.8em").attr("dy", ".15em").attr("transform", "rotate(-65)");
+        d3.select("svg").append("g").attr("class", "x axis").attr("transform", "translate(0, " + 500 + ")").call(xaxis.tickFormat(d3.timeFormat("%Y-%m-%d"))).selectAll("text").style("text-anchor", "end").attr("dx", "-.8em").attr("dy", ".15em").attr("transform", "rotate(-65)");
 
         svg.append("g").attr("class", "y axis").attr("transform", "translate(" + 100 + ", 0)").call(yaxis);
         d3.select("svg").append("g").attr("class", "y axis").attr("transform", "translate(" + 100 + ", 0)").call(yaxis);
