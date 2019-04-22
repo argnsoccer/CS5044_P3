@@ -91,7 +91,7 @@ class LineChart
         d3.select("svg")
             .append("g").
                 attr("class", "y axis")
-                .attr("transform", "translate(100,500)")
+                .attr("transform", "translate(100,0)")
                 .call(yaxis);
 
 
