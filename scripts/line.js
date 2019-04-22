@@ -1,18 +1,5 @@
 var svg = d3.select("body").append("svg").attr("width", 1400).attr("height", 500);
-var xaxis = d3.axisBottom(xScale);
-var yaxis = d3.axisLeft(yScale);
 
-d3.select(".x.axis")
-    .append("text")
-    .text("Date")
-    .style("fill", "black")
-    .attr("x", 1400/2);
-
-d3.select(".y.axis")
-    .append("text")
-    .text("Missions Carried Out")
-    .style("fill", "black")
-    .attr("transform", "rotate(-90,0,90) translate(-100,0)");
 class LineChart
 {
     constructor(data)
@@ -65,10 +52,23 @@ class LineChart
             return 100 + xScale(new Date(d.key));
         })
         .y(function(d){
-            return yScale(parseInt(d));
+            return yScale(parseInt(d.values));
         });
 
+        var xaxis = d3.axisBottom(xScale);
+        var yaxis = d3.axisLeft(yScale);
 
+        d3.select(".x.axis")
+            .append("text")
+            .text("Date")
+            .style("fill", "black")
+            .attr("x", 1400/2);
+
+        d3.select(".y.axis")
+            .append("text")
+            .text("Missions Carried Out")
+            .style("fill", "black")
+            .attr("transform", "rotate(-90,0,90) translate(-100,0)");
 
         svg.append("g")
             .attr("class", "x axis")
