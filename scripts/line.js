@@ -6,8 +6,8 @@ class LineChart
     {
         this.data = data;
         this.processGraph();
-        this.width = $(window).width();
-        this.height = $(window).height();
+        this.width = document.body.clientWidth;
+        this.height = document.body.clientHeight;
         this.margin = 100;
     }
 
