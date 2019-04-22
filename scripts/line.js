@@ -22,6 +22,7 @@ class LineChart
         })
         .entries(opsData);
         var length = missionWeatherData[0].length;
+        console.log(length);
         console.log(missionWeatherData);
     }
 
