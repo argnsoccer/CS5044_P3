@@ -12,7 +12,7 @@ class LineChart
     {
         function sortByDateAscending(a, b) {
             // Dates will be cast to numbers automagically:
-            return a.date - b.date;
+            return a.key - b.key;
         }
 
         var data = this.data;
