@@ -65,4 +65,5 @@ function ready(data) {
 	console.log(data)
 	var svgDoc = d3.select("body").append("svg").attr("width", 700).attr("height", 350);
 	var map = new Map(data, new Date(1945, 2, 16));
+	var lineChart = new lineChart(data); 
 }
