@@ -28,8 +28,6 @@ class LineChart
             element.key = Date(element.key);
         });
 
-        console.log(missionData);
-
 
         console.log(missionWeatherData);
 
