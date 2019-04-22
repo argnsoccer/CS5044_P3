@@ -1,13 +1,12 @@
-var svg = d3.select("body").append("svg").attr("width", document.body.clientWidth).attr("height", 500);
+var svg = d3.select("body").append("svg").attr("width", document.body.clientWidth).attr("height", document.body.clientHeight/2);
 
 class LineChart
 {
-    constructor(data, mapChart)
+    constructor(data)
     {
         this.data = data;
-        this.margin = 100;
-        this.mapChart = mapChart;
         this.processGraph();
+        this.margin = 100;
     }
 
     processGraph()
@@ -48,7 +47,7 @@ class LineChart
 
         var missionCounts = new Array();
         var lineData = [];
-        //creating the counts array for yscale as well as a dictionary with the date and the counts
+        //creating the counts array for yscale as well as a dictionary with the date and the counts to make the line
         for(var i = 0; i < dataLength; i++)
         {
             var length = d3.values(missionWeatherData[i])[1].length;
@@ -72,9 +71,23 @@ class LineChart
             return yScale(parseInt(d.count));
         });
 
+        //in case we wanted to make the line chart an area graph
+        var area = d3.area()
+        .x(function(d){
+            return margin + xScale(new Date(d.date));
+        })
+        .y1(function(d){
+            return yScale(parseInt(d.count));
+        })
+        .y0(function(d){
+            return yScale.range()[0];
+        });
+
         var xaxis = d3.axisBottom(xScale);
         var yaxis = d3.axisLeft(yScale);
-        
+
+
+
         svg.append("text")
             .text("Date")
             .style("fill", "black")
@@ -90,34 +103,42 @@ class LineChart
             .attr("class", "x axis")
             .attr("transform", "translate(100, 400)")
             .call(xaxis.tickFormat(d3.timeFormat("%Y-%m-%d")))
-            .selectAll("text")
-            .style("text-anchor", "end")
-            .attr("dx", "-.8em")
-            .attr("dy", ".15em")
-            .attr("transform", "rotate(-65)");
+                .selectAll("text")
+                .style("text-anchor", "end")
+                .attr("dx", "-.8em")
+                .attr("dy", ".15em")
+                .attr("transform", "rotate(-65)")
+
 
         svg.append("g").attr("class", "y axis").attr("transform", "translate(100, 0)").call(yaxis);
+
 
         svg.append("path")
             .datum(lineData)
             .attr("class", "line")
             .attr("d", line)
+            //   .on("mouseover", function(a){
+            //       svg
+            //       .append("text")
+            //       .attr("class", "tooltip")
+            //       .text(a.date + ": " + a.count)
+            //       .attr("x", xScale(new Date(a.date)) + 10)
+            //       .attr("y", yScale(parseFloat(a.count)) + 10);
+            //   })
+            //   .on("mouseout", function(){
+            //     d3.selectAll(".tooltip").remove();
+            // })
             .style("stroke", "red")
-            .style("fill", "none")
-            .on("click", getSetDateFunction(this.mapChart, new Date(1943, 2, 16)));
+            .style("fill", "none");
+
+
 
         // console.log(missionCounts);
 
         // console.log(dataLength);
         // console.log(missionWeatherData);
     }
-}
 
-function getSetDateFunction(mapChart, date) {
-    console.log(mapChart);
-    return function() {
-        console.log("Click on line");
-        mapChart.setDate(date);
-        mapChart.refresh();
-    }
+
+
 }
