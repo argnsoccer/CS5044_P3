@@ -92,7 +92,7 @@ class LineChart
             .attr("y", 480);
 
         svg.append("text")
-            .attr("transform", "rotate(-90,0,90) translate(-50,120)")
+            .attr("transform", "rotate(-90,0,90) translate(100,120)")
             .text("Missions Over Time")
             .style("fill", "black");
 
