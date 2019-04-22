@@ -15,6 +15,7 @@ class LineChart
     {
 
         var width = this.width;
+        console.log(width);
         var height = this.height;
         var margin = this.margin;
         var data = this.data;
