@@ -16,13 +16,12 @@ class LineChart
         var missionWeatherData = d3.nest()
         .key(function(d){
             return d.date;
-        })
+        }).sortKeys(d3.ascending)
         .key(function(d){
             return d.id
         })
         .entries(opsData)
-        .sortKeys(d3.ascending);
-
+        
         console.log(missionWeatherData);
 
         var timeExtent = d3.extent(opsData, function(d){
