@@ -10,18 +10,24 @@ class LineChart
 
     processGraph()
     {
+        function sortByDateAscending(a, b) {
+            // Dates will be cast to numbers automagically:
+            return a.date - b.date;
+        }
+
         var data = this.data;
         var opsData = data[0];
         var weatherData = data[1];
         var missionWeatherData = d3.nest()
         .key(function(d){
             return d.date;
-        }).sortKeys(d3.ascending)
+        })
         .key(function(d){
             return d.id
         })
         .entries(opsData)
-        
+
+        missionWeatherData = missionWeatherData.sort(sortByDateAscending)
         console.log(missionWeatherData);
 
         var timeExtent = d3.extent(opsData, function(d){
@@ -132,5 +138,7 @@ class LineChart
         // console.log(dataLength);
         // console.log(missionWeatherData);
     }
+
+    
 
 }
