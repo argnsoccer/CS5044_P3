@@ -118,7 +118,10 @@ class LineChart
             .attr("class", "line")
             .attr("d", line)
             .style("stroke", "red")
-            .style("fill", "none");
+            .style("fill", "none")
+	    .on("click", function() {
+	    	console.log("Click on line");
+	    });
 
         // console.log(missionCounts);
 

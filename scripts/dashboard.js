@@ -8,7 +8,7 @@ class Dashboard {
     createDashboard() {
 		// Build data set
 		var missionData = this.data[0];
-        var d = missionData.filter(getFilter(this));
+        var d = missionData.filter(getDashFilter(this));
         var data = [d[0].aircraftSeries, d[0].airForce, d[0].missionType, d[0].targetCity];
 		var columns = ['Aircraft', 'Airforce', 'Mission Type', 'Target City']
 		// Build dashboard
@@ -32,7 +32,7 @@ function addDashboardElement(name, datapoint, dashboard) {
 	dashboard.append(function() { return element; });	
 }
 
-function getFilter(dashboard) {
+function getDashFilter(dashboard) {
     return function dateFilter(d) {
 		var id = dashboard.getId();
         return d.missionId == id; 
