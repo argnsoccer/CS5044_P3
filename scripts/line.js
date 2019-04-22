@@ -2,7 +2,7 @@
 
 class lineChart
 {
-    lineChart(data)
+    constructor(data)
     {
         this.data = data;
         this.processGraph();
