@@ -28,7 +28,7 @@ class LineChart
 
         var xScale = d3.scaleTime().domain(timeExtent).range([0,1503]);
         var missionCounts = new Array();
-        for(i = 0; i < dataLength; i++)
+        for(var i = 0; i < dataLength; i++)
         {
             var length = d3.values(missionWeatherData[i])[1].length;
             missionCounts.push(length);
