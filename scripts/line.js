@@ -17,11 +17,11 @@ class LineChart
         .key(function(d){
             return d.date;
         })
-        .key(function(d){
-            return d.id
-        })
         .rollup(function(leaves){
             return d3.sum(leaves)
+        })
+        .key(function(d){
+            return d.id
         })
         .entries(opsData);
 
