@@ -24,6 +24,7 @@ var opsConverter = function(d) {
 
 	return {
 		date: new Date(+datum[2], +datum[0]-1,+datum[1]),
+		id: d['Mission ID'],
 		theaterOfOperations: d['Theater of Operations'],
 		country: d.Country,
 		airForce: d['Air Force'],
