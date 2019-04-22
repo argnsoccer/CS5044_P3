@@ -22,7 +22,7 @@ class LineChart
         })
         .entries(opsData)
         .sort(function(a,b){
-            return d3.ascending(a.date, b.date);
+            return d3.ascending(a.values, b.date);
         });
 
         console.log(missionWeatherData);
