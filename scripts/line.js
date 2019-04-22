@@ -32,12 +32,12 @@ class LineChart
         var xScale = d3.scaleTime().domain(timeExtent).range([0,1400]);
 
         var missionCounts = new Array();
-        var lineData = new Object();
+        var lineData = [];
         for(var i = 0; i < dataLength; i++)
         {
             var length = d3.values(missionWeatherData[i])[1].length;
             missionCounts.push(length);
-            lineData[d3.values(missionWeatherData[i])[0]] = length;
+            lineData.push({date: d3.values(missionWeatherData[i])[0], count: length});
         }
 
         console.log(lineData);
@@ -49,10 +49,10 @@ class LineChart
         var yScale = d3.scaleLinear().domain(sumExtent).range([400,0]);
 
         var line = d3.line()
-        .x(function(d,i){
+        .x(function(d){
             return 100 + xScale(new Date(d.key));
         })
-        .y(function(d,i){
+        .y(function(d){
             return yScale(parseInt(d.values));
         });
 
