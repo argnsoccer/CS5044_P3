@@ -20,6 +20,11 @@ class LineChart
         .key(function(d){
             return d.id
         })
+        .rollup(function(leaves){
+            return d3.sum(leaves, function(d){
+                return parseInt(d.VALUE);
+            })
+        })
         .entries(opsData);
         console.log(missionWeatherData);
     }
