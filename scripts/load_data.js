@@ -57,11 +57,11 @@ Promise.all(promises).then(ready);
 function ready(data) {
 	//looking up and adding longitude and latitude of Weather station to weather data
 	data[1].forEach(function(weatherD) {
-	var result = data[2].filter(function(stationD) {return stationD.WBAN === weatherD.Station;});
-	weatherD.latitude = (result[0] !== undefined) ? result[0].Latitude : null;
-	weatherD.longitude = (result[0] !== undefined) ? result[0].Longitude : null;
+		var result = data[2].filter(function(stationD) {return stationD.WBAN === weatherD.Station;});
+		weatherD.latitude = (result[0] !== undefined) ? result[0].Latitude : null;
+		weatherD.longitude = (result[0] !== undefined) ? result[0].Longitude : null;
 	});
 	console.log(data)
 	var svgDoc = d3.select("body").append("svg").attr("width", 700).attr("height", 350);
-	var map = new Map(data, new Date(1942, 7, 1));
+	var map = new Map(data, new Date(1944, 7, 1));
 }
