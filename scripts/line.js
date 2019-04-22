@@ -43,10 +43,10 @@ class LineChart
 
         var line = d3.line()
         .x(function(d){
-            return 100+ xScale(new Date(d.key));
+            return 100 + xScale(new Date(d.key));
         })
         .y(function(d){
-            return yScale(parseInt(d.value));
+            return yScale(parseInt(d));
         });
 
         var xaxis = d3.axisBottom(xScale);
@@ -96,11 +96,11 @@ class LineChart
 
 
         svg.append("path").datum(missionCounts).attr("class", "line").attr("d", line);
-        d3.select("svg").
-            append("path")
-                .datum(missionCounts)
-                .attr("class", "line")
-                .attr("d", line);
+        // d3.select("svg").
+        //     append("path")
+        //         .datum(missionCounts)
+        //         .attr("class", "line")
+        //         .attr("d", line);
 
         // console.log(missionCounts);
 
