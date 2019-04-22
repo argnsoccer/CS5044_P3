@@ -1,4 +1,4 @@
-//var svg = d3.select("body").append("svg").attr("width", 1400).attr("height", 500);
+var svg = d3.select("body").append("svg").attr("width", 1400).attr("height", 500);
 class LineChart
 {
     constructor(data)
