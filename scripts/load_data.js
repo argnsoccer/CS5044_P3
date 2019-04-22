@@ -13,7 +13,8 @@ var weatherConverter = function(d) {
 		minTemp: d.MIN,
 		meanTemp: d.MEA,
 		latitude: d.LAT,
-		longitude: d.LON
+		longitude: d.LON,
+        adverseWeather: d.TSHDSBRSGF
 	}
 }
 
@@ -63,5 +64,5 @@ function ready(data) {
 	});
 	console.log(data)
 	var svgDoc = d3.select("body").append("svg").attr("width", 700).attr("height", 350);
-	var map = new Map(data, new Date(1944, 7, 1));
+	var map = new Map(data, new Date(1945, 2, 16));
 }

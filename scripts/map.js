@@ -13,14 +13,67 @@ class Map {
     constructor(data, date) {
         this.date = date;
         this.data = data;
-        this.isTemperature = true;
-        this.refresh();	
+        this.refreshAdverseWeather();
+        this.refreshTemperature();	
+        this.refreshMissions();
+        //this.refreshPrecipitation();
+        //this.refreshWindSpeed();
     }
 
-    refresh() {
-        if(this.isTemperature) {
-            this.refreshTemperature();
-        }
+    refreshMissions() {
+        var data = this.data;
+        var missionData = data[0];
+        missionData = missionData.filter(getFilter(this));
+        console.log("Number of missions today: " + missionData.length);
+        missionData.forEach(function(d) {
+            var arrow = L.polyline([[d.takeoffLat, d.takeoffLon], [d.targetLat, d.targetLon]]).addTo(map);
+            //From:
+            //https://github.com/bbecquet/Leaflet.PolylineDecorator/issues/30
+            var arrowHead = L.polylineDecorator(arrow, {
+                patterns: [
+                    {
+                        offset: '100%',
+                        repeat: 0,
+                        symbol: L.Symbol.arrowHead({pixelSize: 15, polygon: false, pathOptions: {stroke: true}})
+                    }
+                ]
+            }).addTo(map);  
+        })
+    }
+
+    refreshAdverseWeather() {
+        var data = this.data;
+        var weatherData = data[1]
+        weatherData = weatherData.filter(getFilter(this));
+
+        var refreshData = []
+        weatherData.forEach(function(d) {
+            if(d.adverseWeather == '1') {
+                refreshData.push([d.latitude, d.longitude, d.Station]);
+            }
+        })
+
+        console.log("Incidents of adverse weather: " + refreshData.length);
+
+        refreshData.forEach(function(d) {
+            var marker = L.marker([d[0], d[1]]).addTo(map)
+                .bindPopup("Inclement weather at " + d[2]);
+        })
+    }
+
+    refreshPrecipitation() {
+        var data = this.data;
+        var weatherData = data[1]
+        weatherData = weatherData.filter(getFilter(this));
+        var refreshData = []
+        weatherData.forEach(function(d) {
+            if(d.Precipitation != 'T') {
+                refreshData.push([d.Precipitation, d.latitude, d.longitude, d.Station]);
+            }
+        })
+        //Create the layer    
+        this.refreshLayer(refreshData, 10, " Precipitation: ", " inches", 'white', 'grey', 'navy');
+        console.log(refreshData)
     }
 
     refreshTemperature() {
@@ -33,11 +86,24 @@ class Map {
             refreshData.push([temp, d.latitude, d.longitude, d.Station]);
         })
         //Create the layer    
-        this.refreshLayer(refreshData, " Temp: ", " c", 'blue', 'lime', 'red');
+        this.refreshLayer(refreshData, 5, " Temp: ", " c", 'blue', 'lime', 'red');
         console.log(refreshData)
     }
 
-    refreshLayer(dataVar, labelFront, labelEnd, colourLeft, colourCenter, colourRight) {
+    refreshWindSpeed() {
+        var data = this.data;
+        var weatherData = data[1]
+        weatherData = weatherData.filter(getFilter(this));
+        var refreshData = []
+        weatherData.forEach(function(d) {
+            refreshData.push([d.peakWindSpeed, d.latitude, d.longitude, d.Station]);
+        })
+        //Create the layer    
+        this.refreshLayer(refreshData, 5, " Peak Wind Speed: ", " knots", 'white', 'lime', 'green');
+        console.log(refreshData)
+    }
+
+    refreshLayer(dataVar, exp, labelFront, labelEnd, colourLeft, colourCenter, colourRight) {
         // Normalise the data
         var arr = []
         var min = 1000000;
@@ -54,11 +120,9 @@ class Map {
         dataVar.forEach(function(d) {
             arr.push([d[1], d[2], d[0] + diff]);
         })
-        //Normalisation done.
-        console.log("Minimum temperature: " + min);
-        console.log("Maximum temperature: " + max);
 
         //Create icon for weather station
+        //From Leaflet documentation
         var WeatherStation = L.Icon.extend({
             options: {
                 iconUrl: 'weather-station.png',
@@ -76,7 +140,7 @@ class Map {
 
         //Library we use for these neat interpolated maps
         //https://github.com/JoranBeaufort/Leaflet.idw
-        var idx = L.idwLayer(arr, {opacity: 0.3, cellSize: 10, exp: 5,
+        var idx = L.idwLayer(arr, {opacity: 0.3, cellSize: 10, exp: exp,
             max: max+diff, 
             gradient:{0: colourLeft, 0.5: colourCenter, 1: colourRight}}).addTo(map);
     }
