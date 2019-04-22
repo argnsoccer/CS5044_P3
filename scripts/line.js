@@ -20,7 +20,10 @@ class LineChart
         .key(function(d){
             return d.id
         })
-        .entries(opsData);
+        .entries(opsData)
+        .sort(function(d){
+            return d3.ascending(d.value);
+        });
 
         console.log(missionWeatherData);
 
@@ -121,6 +124,7 @@ class LineChart
             .attr("class", "area")
             .attr("d", area)
             .style("stroke", "red")
+            .style("fill", "none")
             .interpolate(monotone);
         // d3.select("svg").
         //     append("path")
