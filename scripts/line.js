@@ -50,10 +50,10 @@ class LineChart
 
         var line = d3.line()
         .x(function(d){
-            return 100 + xScale(new Date(d.key));
+            return 100 + xScale(new Date(d.date));
         })
         .y(function(d){
-            return yScale(parseInt(d.values));
+            return yScale(parseInt(d.count));
         });
 
         var xaxis = d3.axisBottom(xScale);
