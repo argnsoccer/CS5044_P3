@@ -2,11 +2,12 @@ var svg = d3.select("body").append("svg").attr("width", document.body.clientWidt
 
 class LineChart
 {
-    constructor(data)
+    constructor(data, mapChart)
     {
         this.data = data;
-        this.processGraph();
         this.margin = 100;
+        this.mapChart = mapChart;
+        this.processGraph();
     }
 
     processGraph()
@@ -71,23 +72,9 @@ class LineChart
             return yScale(parseInt(d.count));
         });
 
-        //in case we wanted to make the line chart an area graph
-        var area = d3.area()
-        .x(function(d){
-            return margin + xScale(new Date(d.date));
-        })
-        .y1(function(d){
-            return yScale(parseInt(d.count));
-        })
-        .y0(function(d){
-            return yScale.range()[0];
-        });
-
         var xaxis = d3.axisBottom(xScale);
         var yaxis = d3.axisLeft(yScale);
-
-
-
+        
         svg.append("text")
             .text("Date")
             .style("fill", "black")
@@ -103,15 +90,13 @@ class LineChart
             .attr("class", "x axis")
             .attr("transform", "translate(100, 400)")
             .call(xaxis.tickFormat(d3.timeFormat("%Y-%m-%d")))
-                .selectAll("text")
-                .style("text-anchor", "end")
-                .attr("dx", "-.8em")
-                .attr("dy", ".15em")
-                .attr("transform", "rotate(-65)")
-
+            .selectAll("text")
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", "rotate(-65)");
 
         svg.append("g").attr("class", "y axis").attr("transform", "translate(100, 0)").call(yaxis);
-
 
         svg.append("path")
             .datum(lineData)
@@ -119,16 +104,20 @@ class LineChart
             .attr("d", line)
             .style("stroke", "red")
             .style("fill", "none")
-	    .on("click", function() {
-	    	console.log("Click on line");
-	    });
+            .on("click", getSetDateFunction(this.mapChart, new Date(1943, 2, 16)));
 
         // console.log(missionCounts);
 
         // console.log(dataLength);
         // console.log(missionWeatherData);
     }
+}
 
-
-
+function getSetDateFunction(mapChart, date) {
+    console.log(mapChart);
+    return function() {
+        console.log("Click on line");
+        mapChart.setDate(date);
+        mapChart.refresh();
+    }
 }

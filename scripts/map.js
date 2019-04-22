@@ -1,19 +1,27 @@
 //Load a map, open street view style.
-var map = L.map('map').setView([0, 0], 2);
-
-
-
-//here we include a tile layer that specifies the visual look of our map
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',{
-    attribution: '&copy; <a href="href://osm.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
+//var map = L.map('map').setView([0, 0], 2);
+var map;
 
 class Map {
 
-    constructor(data, date) {
+    constructor(data, date, dashboard) {
+		this.dashboard = dashboard;
         this.date = date;
         this.data = data;
+        this.refresh();
+    }
+
+    setDate(newDate) {
+        this.date = newDate;
+    }
+
+    refresh() {
+        document.getElementById('weathermap').innerHTML = "<div id='map' style='width: 100%; height: 100%;'></div>";
+        map = L.map('map').setView([0, 0], 2);
+        //here we include a tile layer that specifies the visual look of our map
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',{
+            attribution: '&copy; <a href="href://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
         this.refreshAdverseWeather();
         this.refreshTemperature();
         this.refreshMissions();
@@ -24,6 +32,7 @@ class Map {
     refreshMissions() {
         var data = this.data;
         var missionData = data[0];
+		var dashboard = this.dashboard;
         missionData = missionData.filter(getFilter(this));
         //console.log("Number of missions today: " + missionData.length);
         missionData.forEach(function(d) {
@@ -38,7 +47,11 @@ class Map {
                         symbol: L.Symbol.arrowHead({pixelSize: 15, polygon: false, pathOptions: {stroke: true}})
                     }
                 ]
-            }).addTo(map);
+            }).addTo(map)
+			  .on("click", function(e) {
+					console.log("Clicked on mission " + d.missionId);
+					dashboard.filter(d.missionId);	
+			});
         })
     }
 

@@ -65,9 +65,7 @@ function ready(data) {
 		weatherD.longitude = (result[0] !== undefined) ? result[0].Longitude : null;
 	});
 	
-	var map = new Map(data, new Date(1945, 2, 16));
-	var lineChart = new LineChart(data); 
-	var svgDoc = d3.select("body").append("svg").attr("width", 700).attr("height", 350);
-	var map = new Map(data, new Date(1945, 2, 16));
 	var dashboard = new Dashboard(data, '1');
+	var mapChart = new Map(data, new Date(1945, 2, 16), dashboard);
+	var lineChart = new LineChart(data, mapChart); 
 }

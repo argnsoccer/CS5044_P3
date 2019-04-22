@@ -5,6 +5,11 @@ class Dashboard {
         this.createDashboard();
     }
 
+    filter(id) {
+    	this.missionId = id;
+	createDashboard();
+    }
+
     createDashboard() {
 		// Build data set
 		var missionData = this.data[0];
