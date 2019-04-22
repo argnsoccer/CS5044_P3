@@ -21,7 +21,7 @@ class LineChart
             return d.id
         })
         .entries(opsData);
-        var length = d3.values(missionWeatherData).length();
+        var length = d3.values(missionWeatherData).length;
         console.log(length);
         console.log(missionWeatherData);
     }
