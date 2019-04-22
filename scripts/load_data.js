@@ -23,6 +23,7 @@ var opsConverter = function(d) {
 	var datum = timeData.split("/");
 
 	return {
+		missionId: d['Mission ID'],
 		date: new Date(+datum[2], +datum[0]-1,+datum[1]),
 		theaterOfOperations: d['Theater of Operations'],
 		country: d.Country,
@@ -64,5 +65,6 @@ function ready(data) {
 	});
 	console.log(data)
 	var svgDoc = d3.select("body").append("svg").attr("width", 700).attr("height", 350);
-	var map = new Map(data, new Date(1945, 2, 16));
+	//var map = new Map(data, new Date(1945, 2, 16));
+	var dashboard = new Dashboard(data, '1');
 }
