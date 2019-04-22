@@ -108,7 +108,7 @@ class LineChart
         svg.append("path")
             .datum(lineData)
             .attr("class", "line")
-            .attr("d", line(lineData))
+            .attr("d", line)
             .style("stroke", "red");
         // d3.select("svg").
         //     append("path")
